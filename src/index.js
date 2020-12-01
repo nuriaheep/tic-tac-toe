@@ -4,7 +4,7 @@ import './index.css';
 
 function Square(props) {
     return (
-        <button className="square" onClick={props.handleClick}>
+        <button className={`square ${props.highlight ? 'mark' : ''}`} onClick={props.handleClick}>
             {props.value}
         </button>
     );
@@ -12,12 +12,16 @@ function Square(props) {
 
 class Board extends React.Component {
     render() {
+        let winArray;
+        getWinnerSquares(this.props.squares) !== null ? (winArray = getWinnerSquares(this.props.squares)) : winArray = '';
       return (
           <div className="board">
               {this.props.squares.map((item, index) =>
                   <Square key={index}
-                    value={this.props.squares[index]}
-                    handleClick={this.props.handleClick.bind(this, index)} />)}
+                      value={this.props.squares[index]}
+                      handleClick={this.props.handleClick.bind(this, index)}
+                      highlight={winArray.includes(index)}
+                    />)}
         </div>
       );
     }
@@ -84,7 +88,7 @@ class Game extends React.Component {
         return (
             <div className="game">
             <div className="game-board">
-                <Board squares={current.squares} handleClick={this.handleClick}/>
+                    <Board squares={current.squares} handleClick={this.handleClick}/>
             </div>
             <div className="game-info">
                 <div>{status}</div>
@@ -122,7 +126,27 @@ function calculateWinner(squares) {
       }
     }
     return null;
-  }
+}
+
+function getWinnerSquares(squares) {
+    const lines = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+    ];
+    for (let i = 0; i < lines.length; i++) {
+        const [a, b, c] = lines[i];
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+            return lines[i];
+        }
+    }
+    return null;
+}
 
   // ========================================
 
