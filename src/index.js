@@ -87,7 +87,7 @@ class Game extends React.Component {
                 'Start the game';
             return (
                 <li key={move}>
-                    <button onClick={() => this.goTo(move)}>{buttonText}</button>
+                    <button className={move === this.state.stepNumber ? 'active' : 'inactive'} onClick={() => this.goTo(move)}>{buttonText}</button>
                 </li>
             )
         })
