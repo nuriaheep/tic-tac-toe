@@ -64,7 +64,7 @@ class Game extends React.Component {
     }
 
     render() {
-        console.log(this.state.history.map(his => his.squares))
+        /* console.log(this.state.history.map(his => his.squares))*/
         const history = this.state.history;
         const current = history[this.state.stepNumber]
         let winner = calculateWinner(current.squares)
@@ -84,6 +84,9 @@ class Game extends React.Component {
         let status;
         if (winner) { status = 'Winner: ' + winner }
         else { status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O') }
+        if (!current.squares.includes(null)) {
+            status = 'There is a draw!'
+        }
 
         return (
             <div className="game">
