@@ -83,7 +83,7 @@ class Game extends React.Component {
 
         const moves = history.map((step, move) => {
             const buttonText = move ?
-                'Go to move number ' + move + ` in (${positions[move]})` :
+                'Go to move number ' + move + ` in (${positions[move] ? positions[move] : ''})` :
                 'Start the game';
             return (
                 <li key={move}>
