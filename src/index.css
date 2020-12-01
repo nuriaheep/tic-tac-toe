@@ -40,6 +40,10 @@ ol.descending {
   width: 34px;
 }
 
+.square.mark {
+  background: #fff678;
+}
+
 .square:focus {
   outline: none;
 }
