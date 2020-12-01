@@ -30,6 +30,7 @@ class Game extends React.Component {
         stepNumber: 0,
         xIsNext: true,
         positions: [null],
+        ascendingOrder: true
     }
 
     handleClick = (i) => {
@@ -47,7 +48,7 @@ class Game extends React.Component {
             }]),
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext,
-            positions: positions.concat(getCoordinates(i))
+            positions: positions.concat(getCoordinates(i)),
         })
     }
 
@@ -87,7 +88,8 @@ class Game extends React.Component {
             </div>
             <div className="game-info">
                 <div>{status}</div>
-                <ol>{moves}</ol>
+                <ol className={this.state.ascendingOrder ? 'ascending' : 'descending'}>{moves}</ol>
+                <button onClick={() => {this.setState({ascendingOrder: !this.state.ascendingOrder})}}>Reverse</button>
             </div>
             </div>
         );
