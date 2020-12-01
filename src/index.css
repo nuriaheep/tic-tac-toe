@@ -7,6 +7,15 @@ ol, ul {
   padding-left: 30px;
 }
 
+ol {
+  display: flex;
+  flex-direction: column;
+}
+
+ol.descending {
+  flex-direction: column-reverse;
+}
+
 .board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
